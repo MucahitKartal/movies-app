@@ -1,30 +1,22 @@
-import React, { useEffect, useState } from "react";
-import requests from "../Requests";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const Main = () => {
-  const [movies, setMovies] = useState([]);
-  const [movieName, setMovieName] = useState("");
+  const [movie, setMovie] = useState([]);
 
-  const API_KEY = process.env.REACT_MOVIE_API_KEY;
-  const BASE_URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}`;
+  const API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
+  const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
 
-  const movie = movies[Math.floor(Math.random() * movies.lenght)];
+  const getMovies = async () => {
+    const { data } = await axios(url);
+    setMovie(data.results);
+  };
 
   useEffect(() => {
-    axios.get(requests.requestPopular).then((res) => {
-      setMovies(res.data);
-    });
+    getMovies();
   }, []);
-  console.log(movie);
 
-  return (
-    <div className="w-full h-[550px] text-white">
-      <div className="w-full h-full">
-        <img src="" alt={movie?.title} />
-      </div>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Main;

@@ -5,4 +5,5 @@ module.exports = {
     extend: {},
   },
   plugins: ["tailwind-scrollbard-hide"],
+  darkMode: "class",
 };
